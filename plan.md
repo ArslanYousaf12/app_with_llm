@@ -31,10 +31,10 @@
 - [x] Update `TimerPage` to include buttons below timer
 - **App is now testable with full UI**
 
-### 5. Implement timer logic in TimerPage 
-- [] Declare Stopwatch directly in `TimerPage` as stateful widget
-- [] Pass Stopwatch to TimerDisplay
-- [] Wire up button callbacks to start/stop/reset Stopwatch
+### 5. Implement timer logic in TimerPage ✅
+- [x] Declare Stopwatch directly in `TimerPage` as stateful widget
+- [x] Pass Stopwatch to TimerDisplay
+- [x] Wire up button callbacks to start/stop/reset Stopwatch
 - **App is now fully functional for manual timer control**
 
 ### 6. Refine timer page layout and modernize UI design 
