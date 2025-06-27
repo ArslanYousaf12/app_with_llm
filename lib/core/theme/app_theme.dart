@@ -7,11 +7,9 @@ class AppTheme {
         primary: Colors.green,
         secondary: Colors.greenAccent,
         surface: Color(0xFF1E1E1E),
-        background: Colors.black,
         onPrimary: Colors.black,
         onSecondary: Colors.black,
         onSurface: Colors.white,
-        onBackground: Colors.white,
       ),
       useMaterial3: true,
       appBarTheme: const AppBarTheme(

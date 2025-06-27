@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/timer_page.dart';
+import 'features/timer/timer_page.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {

@@ -43,6 +43,9 @@ dependencies:
   
   # Audio playback for beep sounds
   audioplayers: ^6.1.0
+  
+  # Google Fonts for BebasNeue
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

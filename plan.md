@@ -14,14 +14,14 @@
 
 ## Phase 2: Core Timer UI Implementation (Testable at Each Step)
 
-### 3. Create TimerDisplay widget with BebasNeue font and TimerPage 
-- [] Configure pubspec.yaml to include BebasNeue font
-- [] Build `TimerDisplay` widget that:
-  - [] Shows elapsed time in SS.S format (e.g., "72.3" for 1:12.3)
-  - [] Uses Ticker for smooth UI refresh at screen refresh rate
-  - [] Takes Stopwatch as parameter
-  - [] Uses BebasNeue font
-- [] Create basic `TimerPage` with just TimerDisplay
+### 3. Create TimerDisplay widget with BebasNeue font and TimerPage ✅
+- [x] Configure pubspec.yaml to include BebasNeue font
+- [x] Build `TimerDisplay` widget that:
+  - [x] Shows elapsed time in SS.S format (e.g., "72.3" for 1:12.3)
+  - [x] Uses Ticker for smooth UI refresh at screen refresh rate
+  - [x] Takes Stopwatch as parameter
+  - [x] Uses BebasNeue font
+- [x] Create basic `TimerPage` with just TimerDisplay
 - **App is now testable with timer display**
 
 ### 4. Create control buttons and update TimerPage 

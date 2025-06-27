@@ -3,7 +3,7 @@ import 'dart:developer';
 
 class AudioService {
   static final AudioPlayer _audioPlayer = AudioPlayer();
-  
+
   static Future<void> playBeep() async {
     try {
       // Play a system beep sound using a tone generator
@@ -14,7 +14,7 @@ class AudioService {
       log('Error playing beep sound: $e');
     }
   }
-  
+
   static Future<void> _playTone({
     required double frequency,
     required int duration,
@@ -30,13 +30,13 @@ class AudioService {
       await _playSystemSound();
     }
   }
-  
+
   static String _generateBeepData(double frequency, int duration) {
     // Generate a data URL for a simple beep sound
     // This is a basic implementation - in production you might want to use actual audio files
     return 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt4AkUOQYIlMrE5pZB';
   }
-  
+
   static Future<void> _playSystemSound() async {
     try {
       // Alternative: Play a short silence as a fallback
@@ -47,7 +47,7 @@ class AudioService {
       log('System sound fallback failed: $e');
     }
   }
-  
+
   static Future<void> dispose() async {
     try {
       await _audioPlayer.dispose();
