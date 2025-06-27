@@ -2,19 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-The complete plan for the project has been written to @plan.md
-
 ## Project Overview
 
-This is a Flutter app for a voice-activated timer designed for hands-free use during calisthenics exercises. The app is currently in early development with basic Flutter boilerplate code.
+This is a **completed** Flutter voice-activated timer app designed for hands-free use during calisthenics exercises. The app implements all core features including voice recognition, audio feedback, responsive UI, and comprehensive testing.
 
-### Key Requirements (from specs/initial_requirements.md)
-- Voice-activated timer with "start" and "stop" commands
-- Simple stopwatch UI with elapsed time display
-- Dark mode only theming
-- Microphone and speaker access for voice commands
-- Audio feedback (beep) when voice commands are recognized
-- Uses `Stopwatch` object for time tracking
+### Key Features
+- Voice commands: "start" and "stop" with variations and fuzzy matching
+- SS.S time format display (e.g., "72.3" for 1:12.3)
+- Dark mode only theming with Material 3 design
+- iOS-style circular control buttons
+- Audio beep feedback on voice recognition
+- Responsive design with flexible layouts
+- Comprehensive permission handling
+- Full test coverage
 
 ## Development Commands
 
@@ -38,30 +38,52 @@ This is a Flutter app for a voice-activated timer designed for hands-free use du
 - `flutter test test/widget_test.dart` - Run single test file
 - `flutter test --coverage` - Run tests with coverage report
 
-## Code Architecture Guidelines
+## Architecture Overview
 
-### Folder Structure Requirements
-- Maintain proper separation of concerns with suitable folder structure
-- Prefer small composable widgets over large ones
-- Keep main.dart as entry point, organize features in subdirectories under lib/
+### Core Components
+- **TimerPage** (`lib/screens/timer_page.dart`) - Main screen with responsive layout, manages Stopwatch state and voice integration
+- **TimerDisplay** (`lib/widgets/timer_display.dart`) - Uses Ticker for smooth 60fps updates, formats time as SS.S
+- **ControlButtons** (`lib/widgets/control_buttons.dart`) - iOS-style circular Start/Stop/Reset buttons with state-dependent styling
 
-### Flutter-Specific Conventions
-- Use `log` from `dart:developer` instead of `print` or `debugPrint`
-- Prefer flex values over hardcoded sizes in Rows/Columns for responsive design
-- Implement dark mode theming through MaterialApp theme rather than hardcoded colors
+### Service Layer
+- **SpeechService** (`lib/services/speech_service.dart`) - Handles speech_to_text initialization, continuous listening, and lifecycle management
+- **AudioService** (`lib/services/audio_service.dart`) - Manages beep sound playback with fallback mechanisms
+- **PermissionService** (`lib/services/permission_service.dart`) - Microphone permission handling with graceful degradation
 
-### Current State
-- Currently has basic Flutter counter app boilerplate in lib/main.dart
-- Single widget test in test/widget_test.dart
-- Uses flutter_lints for code quality (configured in analysis_options.yaml)
-- Dependencies: cupertino_icons, flutter_lints
-- Target SDK: Dart ^3.7.0
+### Key Dependencies
+- `speech_to_text: ^7.0.0` - Voice recognition
+- `permission_handler: ^11.3.1` - Runtime permissions
+- `audioplayers: ^6.1.0` - Audio feedback
 
-### Future Implementation Areas
-The app will need voice recognition, audio playback, and timer functionality to be implemented according to the specifications in specs/initial_requirements.md.
+### Architecture Principles
+- **Stopwatch State Management**: Declared directly in TimerPage state (no ChangeNotifier), passed to TimerDisplay as parameter
+- **Voice Integration**: Continuous listening with automatic restart, fuzzy matching for command variations
+- **Responsive Design**: Uses Flexible widgets and MediaQuery for screen size adaptation
+- **Error Handling**: Comprehensive error handling with logging and graceful fallbacks
+
+## Code Style Conventions
+
+### Flutter-Specific
+- Use `log` from `dart:developer` for all logging
+- Prefer Flexible/Expanded over fixed sizes for responsive design
+- Dark theme implementation via MaterialApp theme, not hardcoded colors
+- Small composable widgets over large monolithic components
+
+### Voice Recognition
+- Command parsing includes fuzzy matching for pronunciation variations
+- Continuous listening with 500ms restart delay
+- Beep feedback on successful command recognition
+- Graceful degradation when permissions denied
+
+### Time Formatting
+- SS.S format: Total seconds with 1 decimal place (e.g., "72.3" for 1:12.3)
+- Uses `duration.inMilliseconds / 1000.0` for precise timing
+- Ticker-based updates for smooth 60fps refresh rate
 
 ## Key Files
-- `specs/initial_requirements.md` - Complete feature requirements and specifications
-- `lib/main.dart` - Main app entry point (currently boilerplate)
-- `test/widget_test.dart` - Main widget test file
+- `specs/initial-requirements.md` - Original feature requirements
+- `plan.md` - Complete implementation plan with all 13 steps
+- `lib/main.dart` - App entry point with dark theme configuration
+- `lib/screens/timer_page.dart` - Main screen with full feature integration
+- `test/widget_test.dart` - Comprehensive widget and integration tests
 - `pubspec.yaml` - Dependencies and project configuration
