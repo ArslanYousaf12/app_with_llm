@@ -24,11 +24,11 @@
 - [x] Create basic `TimerPage` with just TimerDisplay
 - **App is now testable with timer display**
 
-### 4. Create control buttons and update TimerPage 
-- [] Build `TimerControlButton` reusable widget
-- [] Create `StartStopButton` that toggles between start/stop states
-- [] Create `ResetButton` with proper styling
-- [] Update `TimerPage` to include buttons below timer
+### 4. Create control buttons and update TimerPage ✅
+- [x] Build `TimerControlButton` reusable widget
+- [x] Create `StartStopButton` that toggles between start/stop states
+- [x] Create `ResetButton` with proper styling
+- [x] Update `TimerPage` to include buttons below timer
 - **App is now testable with full UI**
 
 ### 5. Implement timer logic in TimerPage 

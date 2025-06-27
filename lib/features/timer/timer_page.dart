@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'timer_display.dart';
+import 'start_stop_button.dart';
+import 'reset_button.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
@@ -10,6 +12,22 @@ class TimerPage extends StatefulWidget {
 
 class _TimerPageState extends State<TimerPage> {
   final Stopwatch _stopwatch = Stopwatch();
+
+  void _handleStartStop() {
+    setState(() {
+      if (_stopwatch.isRunning) {
+        _stopwatch.stop();
+      } else {
+        _stopwatch.start();
+      }
+    });
+  }
+
+  void _handleReset() {
+    setState(() {
+      _stopwatch.reset();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +42,18 @@ class _TimerPageState extends State<TimerPage> {
             flex: 2,
             child: TimerDisplay(stopwatch: _stopwatch),
           ),
-          const Expanded(
+          Expanded(
             flex: 1,
             child: Center(
-              child: Text(
-                'Control buttons will go here',
-                style: TextStyle(color: Colors.grey),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ResetButton(onPressed: _handleReset),
+                  StartStopButton(
+                    isRunning: _stopwatch.isRunning,
+                    onPressed: _handleStartStop,
+                  ),
+                ],
               ),
             ),
           ),
