@@ -1,123 +1,107 @@
-# Voice-Activated Timer App Implementation Plan
+# Voice Timer App Implementation Plan
 
-## Overview
-Building a Flutter voice-activated timer app for hands-free use during calisthenics exercises with dark mode theming and SS.S time format.
+## Phase 1: Project Structure and Theme Setup
 
-## Phase 1: Foundation & UI (Primary Focus)
+### 1. Set up project structure ✅
+- [x] Create `lib/features/timer/` for timer-specific code
+- [x] Create `lib/shared/widgets/` for reusable UI components
+- [x] Create `lib/core/theme/` for theme configuration
 
-### ✅ Step 1: Project Setup & Dependencies
-- [x] Add required packages: `speech_to_text`, `permission_handler`, `audioplayers`
-- [x] Configure iOS/Android permissions in manifest files for microphone access
-- [x] Run `flutter pub get` to install dependencies
+### 2. Configure dark theme ✅
+- [x] Create `app_theme.dart` with MaterialApp dark theme
+- [x] Define color scheme, text styles, and button themes
+- [x] Apply theme to MaterialApp
 
-### ✅ Step 2: Dark Theme Implementation
-- [x] Replace default MaterialApp theme with dark ColorScheme
-- [x] Define consistent dark theme colors following Material Design
-- [x] Update app title to "Voice Timer"
+## Phase 2: Core Timer UI Implementation (Testable at Each Step)
 
-### ✅ Step 3: Architecture, Font Setup & Basic Timer Page
-- [x] Create organized folder structure: `lib/screens/`, `lib/widgets/`, `lib/services/`
-- [x] Setup BabasNeue font configuration in pubspec.yaml
-- [x] Create basic TimerPage with placeholder UI for early testing
-- [x] Update main.dart to use TimerPage as home screen
-- [x] Remove boilerplate counter app code
+### 3. Create TimerDisplay widget with BebasNeue font and TimerPage 
+- [] Configure pubspec.yaml to include BebasNeue font
+- [] Build `TimerDisplay` widget that:
+  - [] Shows elapsed time in SS.S format (e.g., "72.3" for 1:12.3)
+  - [] Uses Ticker for smooth UI refresh at screen refresh rate
+  - [] Takes Stopwatch as parameter
+  - [] Uses BebasNeue font
+- [] Create basic `TimerPage` with just TimerDisplay
+- **App is now testable with timer display**
 
-### ✅ Step 4: Timer Display UI Component with Ticker (SS.S Format)
-- [x] Create TimerDisplay widget using Ticker for smooth refresh rate
-- [x] Implement SS.S format (e.g., "72.3" for 1:12.3)
-- [x] Use BabasNeue font for timer display
-- [x] Style with large, readable text using theme colors
-- [x] Handle time formatting logic (minutes to total seconds conversion)
+### 4. Create control buttons and update TimerPage 
+- [] Build `TimerControlButton` reusable widget
+- [] Create `StartStopButton` that toggles between start/stop states
+- [] Create `ResetButton` with proper styling
+- [] Update `TimerPage` to include buttons below timer
+- **App is now testable with full UI**
 
-### ✅ Step 5: Control Buttons UI & Updated Timer Page Testing
-- [x] Create ControlButtons widget with Start/Stop/Reset buttons
-- [x] Style buttons similar to iOS stopwatch app
-- [x] Use proper spacing and flex layout for responsive design
-- [x] Update TimerPage to include new ControlButtons widget
-- [x] Test UI layout and button interactions
+### 5. Implement timer logic in TimerPage 
+- [] Declare Stopwatch directly in `TimerPage` as stateful widget
+- [] Pass Stopwatch to TimerDisplay
+- [] Wire up button callbacks to start/stop/reset Stopwatch
+- **App is now fully functional for manual timer control**
 
-### ✅ Step 6: Stopwatch Logic Implementation (Simplified)
-- [x] Declare Stopwatch directly in TimerScreen state
-- [x] Pass Stopwatch as argument to TimerDisplay widget
-- [x] Implement start, stop, and reset operations
-- [x] Connect button actions to Stopwatch methods
-- [x] Ensure proper state management and UI updates
+### 6. Refine timer page layout and modernize UI design 
+- [] Update theme to use BebasNeue font throughout app
+- [] Implement modern dark design with bright green accents using AppColors
+- [] Create full-width timer display with green background and black text
+- [] Design circular buttons - filled green for start/stop, outlined for reset
+- [] Add STOPWATCH title to AppBar with settings icon
+- [] Create two-section responsive layout (timer display 2/3, controls 1/3)
+- [] Build VoiceIndicator widget with microphone icon and border
+- [] Match screenshot design with proper spacing and colors
+- [] Repurpose the TimerControlButton to match the new button style (used by the StartStopButton and ResetButton), including a label underneath the button
+- [] Add a start/stop label to the StartStopButton
+- [] Add a reset label to the ResetButton
+- [] Use a StadiumBorder inside the VoiceIndicator
+- [] Make the font bigger in the TimerDisplay
+- [] Update the flex factors to 3/2 in the TimerPage so there's more space for the buttons and voice indicator
 
-## Phase 2: Voice Integration
 
-### ✅ Step 7: Permission Handling
-- [x] Request microphone permissions on app startup
-- [x] Handle permission denied states gracefully
-- [x] Disable voice features when permissions not granted
-- [x] Show appropriate UI feedback for permission status
+## Phase 3: Voice Features
 
-### ✅ Step 8: Speech Recognition Setup
-- [x] Initialize speech_to_text service
-- [x] Implement continuous listening for voice commands
-- [x] Handle speech recognition lifecycle (start/stop listening)
-- [x] Add error handling for speech service failures
+### 7. Set up iOS permissions 
+- [] Add permission_handler package
+- [] Add microphone permission to Info.plist
+- [] Configure iOS Podfile with PERMISSION_MICROPHONE=1 preprocessor definition
+- [] Run pod install to apply iOS permission configuration
+- [] Create permission request flow on app startup
+- [] Add speech recognition permission to Info.plist and Podfile
+- [] Request both microphone and speech recognition permissions together in the PermissionService, only return true if they are both granted
+- [] If permissions are denied, show an alert dialog with instructions and "Cancel" and "Open Settings" buttons
 
-### ✅ Step 9: Voice Command Parsing
-- [x] Add voice command parsing for "start" and "stop" commands
-- [x] Implement command validation and filtering
-- [x] Handle different pronunciations and variations
-- [x] Add logging for voice recognition events
+### 8. Implement voice recognition 
+- [] Add speech_to_text package to pubspec.yaml dependencies
+- [] Create `VoiceCommandService` in `lib/core/services/voice_command_service.dart` with:
+  - [] Stateless service with initialize method taking onStatus/onError callbacks
+  - [] TimerCommand enum for start/stop commands
+  - [] startListening method that returns Future<TimerCommand> using Completer
+  - [] Command processing to recognize "start"/"stop" commands with proper logging
+  - [] Proper speech recognition configuration with US locale and confirmation mode
+- [] Integrate with TimerPage:
+  - [] Initialize VoiceCommandService after permissions are granted
+  - [] Implement continuous listening loop with error recovery
+  - [] Connect voice commands to timer control logic
+  - [] Update VoiceIndicator to show actual listening status from the service
+  - [] Add TODO comment for beep sound (to be implemented in step 9)
+- [] Update VoiceIndicator widget to accept dynamic listening state and show appropriate visual feedback
 
-### ✅ Step 10: Audio Feedback Implementation
-- [x] Implement beep sound playback on command recognition
-- [x] Handle audio permissions and playback errors
-- [x] Add audio assets for beep sounds
-- [x] Test audio feedback on different devices
+### 9. Add audio feedback
+- [ ] Add audioplayers package
+- [ ] Create `AudioService` to play beep sound
+- [ ] Trigger beep when voice command recognized
 
-### ✅ Step 11: Voice-Timer Integration
-- [x] Connect voice commands to existing timer actions
-- [x] Ensure voice commands work seamlessly with UI controls
-- [x] Handle conflicts between voice and manual controls
-- [x] Test complete voice-activated workflow
+## Phase 4: Polish and Error Handling
 
-## Phase 3: Testing & Polish
+### 10. Handle permission denial
+- [ ] Show appropriate UI when permissions denied
+- [ ] Disable voice features gracefully
+- [ ] Maintain manual-only mode functionality
 
-### ✅ Step 12: Widget Testing
-- [x] Widget tests for TimerDisplay component
-- [x] Widget tests for ControlButtons component
-- [x] Integration tests for timer functionality
-- [x] Test timer accuracy and performance
+### 11. Testing and refinement
+- [ ] Test voice command recognition accuracy
+- [ ] Add proper logging with dart:developer
+- [ ] Polish UI animations and transitions
 
-### ✅ Step 13: Final Polish & Responsive Design
-- [x] Test responsive design across different screen sizes
-- [x] UI accessibility improvements
-- [x] Error handling and edge case management
-- [x] Performance optimization and cleanup
-
-## Technical Requirements
-
-### Time Format
-- Display format: SS.S (e.g., "72.3" for 1 minute 12.3 seconds)
-- Convert minutes:seconds to total seconds for display
-- Use decimal precision for sub-second timing
-
-### UI Components
-- **TimerDisplay**: Uses Ticker for smooth refresh at screen refresh rate
-- **ControlButtons**: Start/Stop/Reset styled like iOS stopwatch
-- **TimerPage**: Main screen container with proper layout
-
-### Architecture
-- Stopwatch declared directly in TimerScreen state (no ChangeNotifier needed)
-- TimerDisplay receives Stopwatch as parameter
-- Clean separation between UI and business logic
-
-### Testing Strategy
-- Manual testing possible at each major step
-- Each phase builds incrementally for continuous validation
-- UI testing prioritized for immediate feedback
-
-## Current Status
-- ✅ All 13 steps completed successfully
-- 🎉 Project implementation complete
-- 📱 Voice-activated timer app ready for use
-
-## Notes
-- Focus on UI-first approach for immediate testability
-- Voice features added after core timer functionality is solid
-- Dark mode only as specified in requirements
-- BabasNeue font integrated for professional timer display
+## Key Implementation Notes
+- Time format: SS.S (seconds with one decimal)
+- TimerDisplay uses Ticker for smooth refresh
+- Stopwatch lives in TimerPage, passed to TimerDisplay
+- Each phase produces a testable app
+- No ChangeNotifier needed for simple timer logic
