@@ -1,0 +1,12 @@
+
+- The `VoiceCommandService` should be completely stateless (any state variables should be moved to the TimerPage)
+- Remove the `setCallbacks` method. Instead, add `onStatus` and `onError` function callbacks as arguments directly to the `initialize` method
+- Remove all calls to `Future.delayed`
+- Define an `enum TimerCommand { start, stop }` that will represent the valid commands
+- Make `_startListeningLoop` public by renaming it to `startListening`
+- Fix the deprecation warnings in the call to `_speechToText.listen`
+- Update `startListening` to return a `Future<TimerCommand>`
+- Remove `_onSpeechResult` and re-implement it inline in the `onResult` callback
+- Inside `startListening`, use a Completer that completes when a command is recognized inside the `onResult` callback
+- Remove all other helper methods.
+- Ensure `_speechToText.stop()` is called before the completer completes and a value is returned from `startListening()`

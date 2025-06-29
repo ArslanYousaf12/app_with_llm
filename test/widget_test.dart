@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_with_llm/main.dart';
-import 'package:app_with_llm/widgets/timer_display.dart';
-import 'package:app_with_llm/widgets/control_buttons.dart';
+import 'package:app_with_llm/features/timer/timer_display.dart';
+import 'package:app_with_llm/features/timer/start_stop_button.dart';
+import 'package:app_with_llm/features/timer/reset_button.dart';
 
 void main() {
   group('Timer App Tests', () {
@@ -14,30 +15,30 @@ void main() {
       expect(find.text('0.0'), findsOneWidget);
       
       // Verify control buttons are present
-      expect(find.text('Start'), findsOneWidget);
-      expect(find.text('Reset'), findsOneWidget);
+      expect(find.text('START'), findsOneWidget);
+      expect(find.text('RESET'), findsOneWidget);
     });
 
     testWidgets('Start button changes to Stop when tapped', (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
 
       // Find and tap the start button
-      final startButton = find.text('Start');
+      final startButton = find.text('START');
       expect(startButton, findsOneWidget);
       
       await tester.tap(startButton);
       await tester.pump();
 
-      // Verify button text changes to Stop
-      expect(find.text('Stop'), findsOneWidget);
-      expect(find.text('Start'), findsNothing);
+      // Verify button text changes to STOP
+      expect(find.text('STOP'), findsOneWidget);
+      expect(find.text('START'), findsNothing);
     });
 
     testWidgets('Timer display updates when running', (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
 
       // Start the timer
-      await tester.tap(find.text('Start'));
+      await tester.tap(find.text('START'));
       await tester.pump();
 
       // Advance time and pump frames
@@ -51,16 +52,16 @@ void main() {
       await tester.pumpWidget(const MyApp());
 
       // Start timer
-      await tester.tap(find.text('Start'));
+      await tester.tap(find.text('START'));
       await tester.pump(const Duration(milliseconds: 100));
 
       // Reset timer
-      await tester.tap(find.text('Reset'));
+      await tester.tap(find.text('RESET'));
       await tester.pump();
 
-      // Should show 0.0 and Start button
+      // Should show 0.0 and START button
       expect(find.text('0.0'), findsOneWidget);
-      expect(find.text('Start'), findsOneWidget);
+      expect(find.text('START'), findsOneWidget);
     });
   });
 
@@ -81,47 +82,15 @@ void main() {
     });
   });
 
-  group('Control Buttons Widget Tests', () {
-    testWidgets('ControlButtons displays correct text based on state', (WidgetTester tester) async {
-      bool isRunning = false;
-      int startStopCalls = 0;
-      int resetCalls = 0;
+  group('Voice Indicator Tests', () {
+    testWidgets('VoiceIndicator shows appropriate status', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ControlButtons(
-              isRunning: isRunning,
-              onStartStop: () => startStopCalls++,
-              onReset: () => resetCalls++,
-            ),
-          ),
-        ),
-      );
-
-      // Should show Start when not running
-      expect(find.text('Start'), findsOneWidget);
-      expect(find.text('Reset'), findsOneWidget);
-
-      // Tap start button
-      await tester.tap(find.text('Start'));
-      expect(startStopCalls, equals(1));
-
-      // Test with running state
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ControlButtons(
-              isRunning: true,
-              onStartStop: () => startStopCalls++,
-              onReset: () => resetCalls++,
-            ),
-          ),
-        ),
-      );
-
-      // Should show Stop when running
-      expect(find.text('Stop'), findsOneWidget);
+      // Should show voice indicator at bottom
+      expect(find.text('VOICE DISABLED'), findsOneWidget);
+      
+      // Should show microphone icon
+      expect(find.byIcon(Icons.mic_off), findsOneWidget);
     });
   });
 }

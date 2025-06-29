@@ -18,6 +18,7 @@ class TimerControlButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
           width: AppConstants.buttonSize,
@@ -45,9 +46,12 @@ class TimerControlButton extends StatelessWidget {
                 ),
         ),
         const SizedBox(height: AppConstants.paddingSmall),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelLarge,
+        Flexible(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.labelLarge,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
