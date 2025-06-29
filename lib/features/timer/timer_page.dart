@@ -35,7 +35,7 @@ class _TimerPageState extends State<TimerPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.settings),
+          icon: const Icon(Icons.settings, color: Colors.white),
           onPressed: () {
             // TODO: Navigate to settings page
           },
