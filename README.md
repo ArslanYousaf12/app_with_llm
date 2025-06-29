@@ -2,6 +2,10 @@
 
 A Flutter-based voice-controlled timer app designed for hands-free use during calisthenics exercises.
 
+## Screenshot
+
+![App Screenshot](screenshot/screenshot.png)
+
 ## Features
 
 - **Voice Commands**: Start and stop timer with voice commands ("start", "stop" and variations)
