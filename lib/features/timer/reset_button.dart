@@ -14,6 +14,7 @@ class ResetButton extends StatelessWidget {
     return TimerControlButton(
       onPressed: onPressed,
       icon: Icons.refresh,
+      label: 'RESET',
       isPrimary: false,
     );
   }

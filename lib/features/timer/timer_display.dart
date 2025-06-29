@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../core/constants/app_constants.dart';
 
 class TimerDisplay extends StatefulWidget {
   final Stopwatch stopwatch;
@@ -29,23 +29,32 @@ class _TimerDisplayState extends State<TimerDisplay>
   }
 
   String _formatTime(Duration duration) {
-    final totalSeconds = duration.inMilliseconds / 1000.0;
-    return totalSeconds.toStringAsFixed(1);
+    final totalSeconds = duration.inSeconds;
+    final minutes = totalSeconds ~/ 60;
+    final seconds = totalSeconds % 60;
+    final milliseconds = duration.inMilliseconds % 1000;
+    final tenths = (milliseconds / 100).floor();
+    
+    return '$minutes:${seconds.toString().padLeft(2, '0')}.$tenths';
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      margin: const EdgeInsets.all(AppConstants.paddingMedium),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.paddingLarge,
+        vertical: AppConstants.paddingLarge * 2,
+      ),
+      decoration: BoxDecoration(
+        color: AppConstants.primary,
+        borderRadius: BorderRadius.circular(AppConstants.paddingMedium),
+      ),
       child: Center(
         child: Text(
           _formatTime(widget.stopwatch.elapsed),
-          style: GoogleFonts.bebasNeue(
-            fontSize: 72,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
     );

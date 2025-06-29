@@ -22,14 +22,13 @@ class VoiceIndicator extends StatelessWidget {
         horizontal: AppConstants.paddingLarge,
         vertical: AppConstants.paddingMedium,
       ),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: AppConstants.primary,
-        border: Border.all(
-          color: AppConstants.primary,
-          width: AppConstants.buttonBorderWidth,
-        ),
-        borderRadius: BorderRadius.circular(
-          AppConstants.voiceIndicatorBorderRadius,
+        shape: StadiumBorder(
+          side: BorderSide(
+            color: AppConstants.primary,
+            width: AppConstants.buttonBorderWidth,
+          ),
         ),
       ),
       child: Row(

@@ -16,7 +16,8 @@ class StartStopButton extends StatelessWidget {
     return TimerControlButton(
       onPressed: onPressed,
       icon: isRunning ? Icons.pause : Icons.play_arrow,
-      isPrimary: true,
+      label: isRunning ? 'STOP' : 'START',
+      isPrimary: !isRunning,
     );
   }
 }

@@ -34,17 +34,18 @@ class _TimerPageState extends State<TimerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(Icons.settings),
         title: const Text('STOPWATCH'),
         centerTitle: true,
       ),
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: TimerDisplay(stopwatch: _stopwatch),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
