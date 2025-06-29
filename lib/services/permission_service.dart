@@ -35,35 +35,6 @@ class PermissionService {
     }
   }
   
-  static Future<void> showPermissionDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Permissions Required'),
-          content: const Text(
-            'This app needs microphone and speech recognition permissions to provide voice control features. Please grant these permissions in Settings.',
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Open Settings'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                openAppSettings();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
   
   static Future<bool> checkPermissions() async {
     try {
