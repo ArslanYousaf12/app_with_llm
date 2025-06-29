@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'timer_display.dart';
 import 'start_stop_button.dart';
 import 'reset_button.dart';
+import '../../widgets/voice_indicator.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
@@ -56,6 +57,12 @@ class _TimerPageState extends State<TimerPage> {
                 ],
               ),
             ),
+          ),
+          // Voice indicator at the bottom
+          VoiceIndicator(
+            isListening: _stopwatch.isRunning,
+            status: _stopwatch.isRunning ? 'STOP' : 'START',
+            confidence: 0.99,
           ),
         ],
       ),

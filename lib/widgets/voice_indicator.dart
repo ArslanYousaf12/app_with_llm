@@ -9,8 +9,8 @@ class VoiceIndicator extends StatelessWidget {
   const VoiceIndicator({
     super.key,
     required this.isListening,
-    required this.status,
-    this.confidence = 0.0,
+    this.status = 'STOP',
+    this.confidence = 0.99,
   });
 
   @override
@@ -23,7 +23,7 @@ class VoiceIndicator extends StatelessWidget {
         vertical: AppConstants.paddingMedium,
       ),
       decoration: BoxDecoration(
-        color: AppConstants.backgroundDark,
+        color: AppConstants.brightGreen,
         border: Border.all(
           color: AppConstants.brightGreen,
           width: AppConstants.buttonBorderWidth,
@@ -35,40 +35,29 @@ class VoiceIndicator extends StatelessWidget {
           // Microphone icon
           Icon(
             Icons.mic,
-            color: AppConstants.brightGreen,
+            color: AppConstants.textDark,
             size: 24,
           ),
           const SizedBox(width: AppConstants.paddingMedium),
           
-          // Status text
+          // Status text with confidence
           Expanded(
             child: Text(
-              status,
+              '$status - ${(confidence * 100).toInt()}%',
               style: TextStyle(
-                color: AppConstants.brightGreen,
+                color: AppConstants.textDark,
                 fontSize: AppConstants.buttonTextSize,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
           
-          // Confidence indicator or info icon
-          if (confidence > 0) ...[
-            Text(
-              '${(confidence * 100).toInt()}%',
-              style: TextStyle(
-                color: AppConstants.brightGreen,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ] else ...[
-            Icon(
-              Icons.info_outline,
-              color: AppConstants.brightGreen,
-              size: 20,
-            ),
-          ],
+          // Info icon
+          Icon(
+            Icons.info_outline,
+            color: AppConstants.textDark,
+            size: 20,
+          ),
         ],
       ),
     );
