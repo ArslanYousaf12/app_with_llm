@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import '../core/constants/app_constants.dart';
 
 class TimerDisplay extends StatefulWidget {
   final Stopwatch stopwatch;
@@ -43,13 +44,27 @@ class _TimerDisplayState extends State<TimerDisplay>
     final elapsed = widget.stopwatch.elapsed;
     final formattedTime = _formatTime(elapsed);
 
-    return Text(
-      formattedTime,
-      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-        fontSize: 120,
-        fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.primary,
-        fontFamily: 'BabasNeue',
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(AppConstants.paddingMedium),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.paddingLarge,
+        vertical: AppConstants.paddingXLarge * 2,
+      ),
+      decoration: BoxDecoration(
+        color: AppConstants.brightGreen,
+        borderRadius: BorderRadius.circular(AppConstants.paddingMedium),
+      ),
+      child: Center(
+        child: Text(
+          formattedTime,
+          style: TextStyle(
+            fontSize: AppConstants.timerDisplayFontSize,
+            fontWeight: FontWeight.bold,
+            color: AppConstants.textDark,
+            fontFamily: 'BebasNeue',
+          ),
+        ),
       ),
     );
   }

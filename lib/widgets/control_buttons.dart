@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/constants/app_constants.dart';
 
 class ControlButtons extends StatelessWidget {
   final bool isRunning;
@@ -17,69 +18,72 @@ class ControlButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // Start/Stop button styled like iOS stopwatch
+        // Start/Stop button
+        _buildButton(
+          text: isRunning ? 'STOP' : 'START',
+          icon: isRunning ? Icons.pause : Icons.play_arrow,
+          backgroundColor: isRunning ? AppConstants.backgroundDark : AppConstants.brightGreen,
+          borderColor: isRunning ? AppConstants.brightGreen : AppConstants.brightGreen,
+          textColor: isRunning ? AppConstants.brightGreen : AppConstants.textDark,
+          onTap: onStartStop,
+        ),
+        
+        // Reset button
+        _buildButton(
+          text: 'RESET',
+          icon: Icons.refresh,
+          backgroundColor: AppConstants.backgroundDark,
+          borderColor: AppConstants.brightGreen,
+          textColor: AppConstants.brightGreen,
+          onTap: onReset,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildButton({
+    required String text,
+    required IconData icon,
+    required Color backgroundColor,
+    required Color borderColor,
+    required Color textColor,
+    required VoidCallback onTap,
+  }) {
+    return Column(
+      children: [
         Container(
-          width: 80,
-          height: 80,
+          width: AppConstants.buttonSize,
+          height: AppConstants.buttonSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isRunning 
-                ? Colors.red.shade600 
-                : Colors.green.shade600,
+            color: backgroundColor,
             border: Border.all(
-              color: isRunning 
-                  ? Colors.red.shade400 
-                  : Colors.green.shade400,
-              width: 3,
+              color: borderColor,
+              width: AppConstants.buttonBorderWidth,
             ),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(40),
-              onTap: onStartStop,
+              borderRadius: BorderRadius.circular(AppConstants.buttonSize / 2),
+              onTap: onTap,
               child: Center(
-                child: Text(
-                  isRunning ? 'Stop' : 'Start',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Icon(
+                  icon,
+                  color: textColor,
+                  size: 36,
                 ),
               ),
             ),
           ),
         ),
-        
-        // Reset button
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey.shade700,
-            border: Border.all(
-              color: Colors.grey.shade500,
-              width: 3,
-            ),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(40),
-              onTap: onReset,
-              child: Center(
-                child: Text(
-                  'Reset',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
+        const SizedBox(height: AppConstants.paddingSmall),
+        Text(
+          text,
+          style: TextStyle(
+            color: AppConstants.brightGreen,
+            fontSize: AppConstants.buttonTextSize,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
