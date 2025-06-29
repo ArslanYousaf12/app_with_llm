@@ -45,7 +45,8 @@ class _TimerPageState extends State<TimerPage> {
       ),
       body: Column(
         children: [
-          Expanded(flex: 3, child: TimerDisplay(stopwatch: _stopwatch)),
+          Expanded(flex: 7, child: TimerDisplay(stopwatch: _stopwatch)),
+          SizedBox(height: 80),
           Expanded(
             flex: 2,
             child: Center(
@@ -67,6 +68,7 @@ class _TimerPageState extends State<TimerPage> {
             status: 'LISTENING',
             confidence: 0.99,
           ),
+          SizedBox(height: 20),
         ],
       ),
     );
