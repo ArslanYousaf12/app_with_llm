@@ -40,7 +40,7 @@ class VoiceIndicator extends StatelessWidget {
           // Status text with confidence
           Expanded(
             child: Text(
-              '$status - ${(confidence * 100).toInt()}%',
+              '$status ...',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),

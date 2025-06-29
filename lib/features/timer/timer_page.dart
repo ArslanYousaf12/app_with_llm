@@ -45,10 +45,7 @@ class _TimerPageState extends State<TimerPage> {
       ),
       body: Column(
         children: [
-          Expanded(
-            flex: 3,
-            child: TimerDisplay(stopwatch: _stopwatch),
-          ),
+          Expanded(flex: 3, child: TimerDisplay(stopwatch: _stopwatch)),
           Expanded(
             flex: 2,
             child: Center(
@@ -67,7 +64,7 @@ class _TimerPageState extends State<TimerPage> {
           // Voice indicator at the bottom
           VoiceIndicator(
             isListening: _stopwatch.isRunning,
-            status: _stopwatch.isRunning ? 'STOP' : 'START',
+            status: 'LISTENING',
             confidence: 0.99,
           ),
         ],
