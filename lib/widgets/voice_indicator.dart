@@ -23,41 +23,31 @@ class VoiceIndicator extends StatelessWidget {
         vertical: AppConstants.paddingMedium,
       ),
       decoration: BoxDecoration(
-        color: AppConstants.brightGreen,
+        color: AppConstants.primary,
         border: Border.all(
-          color: AppConstants.brightGreen,
+          color: AppConstants.primary,
           width: AppConstants.buttonBorderWidth,
         ),
-        borderRadius: BorderRadius.circular(AppConstants.voiceIndicatorBorderRadius),
+        borderRadius: BorderRadius.circular(
+          AppConstants.voiceIndicatorBorderRadius,
+        ),
       ),
       child: Row(
         children: [
           // Microphone icon
-          Icon(
-            Icons.mic,
-            color: AppConstants.textDark,
-            size: 24,
-          ),
+          Icon(Icons.mic, color: AppConstants.textDark, size: 24),
           const SizedBox(width: AppConstants.paddingMedium),
-          
+
           // Status text with confidence
           Expanded(
             child: Text(
               '$status - ${(confidence * 100).toInt()}%',
-              style: TextStyle(
-                color: AppConstants.textDark,
-                fontSize: AppConstants.buttonTextSize,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-          
+
           // Info icon
-          Icon(
-            Icons.info_outline,
-            color: AppConstants.textDark,
-            size: 20,
-          ),
+          Icon(Icons.info_outline, color: AppConstants.textDark, size: 20),
         ],
       ),
     );

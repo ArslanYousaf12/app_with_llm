@@ -37,21 +37,25 @@
 - [x] Wire up button callbacks to start/stop/reset Stopwatch
 - **App is now fully functional for manual timer control**
 
-### 6. Refine timer page layout and modernize UI design 
-- [] Update theme to use BebasNeue font throughout app
-- [] Implement modern dark design with bright green accents using AppColors
-- [] Create full-width timer display with green background and black text
-- [] Design circular buttons - filled green for start/stop, outlined for reset
-- [] Add STOPWATCH title to AppBar with settings icon
-- [] Create two-section responsive layout (timer display 2/3, controls 1/3)
-- [] Build VoiceIndicator widget with microphone icon and border
-- [] Match screenshot design with proper spacing and colors
-- [] Repurpose the TimerControlButton to match the new button style (used by the StartStopButton and ResetButton), including a label underneath the button
-- [] Add a start/stop label to the StartStopButton
-- [] Add a reset label to the ResetButton
-- [] Use a StadiumBorder inside the VoiceIndicator
-- [] Make the font bigger in the TimerDisplay
-- [] Update the flex factors to 3/2 in the TimerPage so there's more space for the buttons and voice indicator
+### 6. Refine timer page layout and modernize UI design ✅
+- [x] Update theme to use BebasNeue font throughout app
+- [x] Implement modern dark design with bright green accents using AppColors
+- [x] Create full-width timer display with green background and black text
+- [x] Design circular buttons - filled green for start/stop, outlined for reset
+- [x] Add STOPWATCH title to AppBar with settings icon
+- [x] Create two-section responsive layout (timer display 2/3, controls 1/3)
+- [x] Build VoiceIndicator widget with microphone icon and border
+- [x] Match screenshot design with proper spacing and colors
+- [x] Repurpose the TimerControlButton to match the new button style (used by the StartStopButton and ResetButton), including a label underneath the button
+- [x] Add a start/stop label to the StartStopButton
+- [x] Add a reset label to the ResetButton
+- [x] Use a StadiumBorder inside the VoiceIndicator
+- [x] Make the font bigger in the TimerDisplay
+- [x] Update the flex factors to 3/2 in the TimerPage so there's more space for the buttons and voice indicator
+- [x] Fix time format to show MM:SS.S format (e.g., "0:24.1")
+- [x] Integrate VoiceIndicator widget into TimerPage UI
+- [x] Use colors from app_colors.dart throughout the app
+- [x] Ensure all Text widgets use BebasNeue font through theme
 
 
 ## Phase 3: Voice Features

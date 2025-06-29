@@ -13,9 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Voice Timer',
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.themeData,
       home: const TimerPage(),
     );
   }
 }
-

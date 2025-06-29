@@ -30,6 +30,18 @@ class AppTheme {
           color: AppConstants.textLight,
           fontFamily: AppConstants.fontFamily,
         ),
+        bodyMedium: TextStyle(
+          fontSize: AppConstants.buttonTextSize,
+          fontWeight: FontWeight.w600,
+          color: AppConstants.textDark,
+          fontFamily: AppConstants.fontFamily,
+        ),
+        titleMedium: TextStyle(
+          fontSize: AppConstants.buttonTextSize,
+          fontWeight: FontWeight.w600,
+          color: AppConstants.textLight,
+          fontFamily: AppConstants.fontFamily,
+        ),
       ),
     );
   }
