@@ -34,7 +34,12 @@ class _TimerPageState extends State<TimerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.settings),
+        leading: IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () {
+            // TODO: Navigate to settings page
+          },
+        ),
         title: const Text('STOPWATCH'),
         centerTitle: true,
       ),

@@ -29,13 +29,8 @@ class _TimerDisplayState extends State<TimerDisplay>
   }
 
   String _formatTime(Duration duration) {
-    final totalSeconds = duration.inSeconds;
-    final minutes = totalSeconds ~/ 60;
-    final seconds = totalSeconds % 60;
-    final milliseconds = duration.inMilliseconds % 1000;
-    final tenths = (milliseconds / 100).floor();
-    
-    return '$minutes:${seconds.toString().padLeft(2, '0')}.$tenths';
+    final totalSeconds = duration.inMilliseconds / 1000.0;
+    return totalSeconds.toStringAsFixed(1);
   }
 
   @override
