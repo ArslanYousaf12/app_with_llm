@@ -54,21 +54,16 @@ class _TimerDisplayState extends State<TimerDisplay>
       margin: const EdgeInsets.all(AppConstants.paddingMedium),
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.paddingLarge,
-        vertical: AppConstants.paddingXLarge * 2,
+        vertical: AppConstants.paddingLarge * 2,
       ),
       decoration: BoxDecoration(
-        color: AppConstants.brightGreen,
+        color: AppConstants.primary,
         borderRadius: BorderRadius.circular(AppConstants.paddingMedium),
       ),
       child: Center(
         child: Text(
           formattedTime,
-          style: TextStyle(
-            fontSize: AppConstants.timerDisplayFontSize,
-            fontWeight: FontWeight.bold,
-            color: AppConstants.textDark,
-            fontFamily: 'BebasNeue',
-          ),
+          style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
     );

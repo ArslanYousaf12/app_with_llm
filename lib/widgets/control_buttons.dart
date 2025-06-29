@@ -20,35 +20,37 @@ class ControlButtons extends StatelessWidget {
       children: [
         // Start/Stop button
         _buildButton(
+          context: context,
           text: isRunning ? 'STOP' : 'START',
           icon: isRunning ? Icons.pause : Icons.play_arrow,
-          backgroundColor: isRunning ? AppConstants.backgroundDark : AppConstants.brightGreen,
-          borderColor: isRunning ? AppConstants.brightGreen : AppConstants.brightGreen,
-          textColor: isRunning ? AppConstants.brightGreen : AppConstants.textDark,
           onTap: onStartStop,
+          isFilled: !isRunning,
         ),
         
         // Reset button
         _buildButton(
+          context: context,
           text: 'RESET',
           icon: Icons.refresh,
-          backgroundColor: AppConstants.backgroundDark,
-          borderColor: AppConstants.brightGreen,
-          textColor: AppConstants.brightGreen,
           onTap: onReset,
+          isFilled: false,
         ),
       ],
     );
   }
 
   Widget _buildButton({
+    required BuildContext context,
     required String text,
     required IconData icon,
-    required Color backgroundColor,
-    required Color borderColor,
-    required Color textColor,
     required VoidCallback onTap,
+    required bool isFilled,
   }) {
+    final backgroundColor =
+        isFilled ? AppConstants.primary : AppConstants.background;
+    final iconColor = isFilled ? AppConstants.textDark : AppConstants.textLight;
+    final borderColor = AppConstants.primary;
+
     return Column(
       children: [
         Container(
@@ -65,13 +67,14 @@ class ControlButtons extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(AppConstants.buttonSize / 2),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.buttonBorderRadius),
               onTap: onTap,
               child: Center(
                 child: Icon(
                   icon,
-                  color: textColor,
-                  size: 36,
+                  color: iconColor,
+                  size: AppConstants.buttonIconSize,
                 ),
               ),
             ),
@@ -80,11 +83,7 @@ class ControlButtons extends StatelessWidget {
         const SizedBox(height: AppConstants.paddingSmall),
         Text(
           text,
-          style: TextStyle(
-            color: AppConstants.brightGreen,
-            fontSize: AppConstants.buttonTextSize,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ],
     );
