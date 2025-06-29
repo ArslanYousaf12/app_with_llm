@@ -1,5 +1,5 @@
-name: app_with_llm
-description: "A new Flutter project."
+name: voice_activated_timer_app
+description: "A Flutter-based voice-controlled timer app designed for hands-free use during calisthenics exercises."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

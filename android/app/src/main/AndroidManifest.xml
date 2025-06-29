@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
-        android:label="app_with_llm"
+        android:label="Voice-Activated Timer App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
