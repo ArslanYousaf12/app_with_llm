@@ -47,5 +47,7 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs microphone access to recognize voice commands for hands-free timer control during exercises.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition to process voice commands for hands-free timer control during exercises.</string>
 </dict>
 </plist>

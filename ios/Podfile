@@ -4,6 +4,10 @@
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
+# Permission handler preprocessor definitions
+ENV['PERMISSION_MICROPHONE'] = '1'
+ENV['PERMISSION_SPEECH_RECOGNIZER'] = '1'
+
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,

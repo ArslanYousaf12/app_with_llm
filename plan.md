@@ -60,16 +60,16 @@
 
 ## Phase 3: Voice Features
 
-### 7. Set up iOS permissions 
-- [] Add permission_handler package
-- [] Add microphone permission to Info.plist
-- [] Configure iOS Podfile with PERMISSION_MICROPHONE=1 preprocessor definition
-- [] Run pod install to apply iOS permission configuration
-- [] Create permission request flow on app startup
-- [] Add speech recognition permission to Info.plist and Podfile
-- [] Request both microphone and speech recognition permissions together in the PermissionService, only return true if they are both granted
-- [] If permissions are denied, show an alert dialog with instructions and "Cancel" and "Open Settings" buttons
-
+### 7. Set up iOS permissions ✅
+- [x] Add permission_handler package
+- [x] Add microphone permission to Info.plist
+- [x] Configure iOS Podfile with PERMISSION_MICROPHONE=1 preprocessor definition
+- [x] Run pod install to apply iOS permission configuration
+- [x] Create permission request flow on app startup
+- [x] Add speech recognition permission to Info.plist and Podfile
+- [x] Request both microphone and speech recognition permissions together in the PermissionService, only return true if they are both granted
+- [x] If permissions are denied, show an alert dialog with instructions and "Cancel" and "Open Settings" buttons
+- [x] Set up android permissions
 ### 8. Implement voice recognition 
 - [] Add speech_to_text package to pubspec.yaml dependencies
 - [] Create `VoiceCommandService` in `lib/core/services/voice_command_service.dart` with:

@@ -3,6 +3,7 @@ import 'timer_display.dart';
 import 'start_stop_button.dart';
 import 'reset_button.dart';
 import '../../widgets/voice_indicator.dart';
+import '../../services/permission_service.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
@@ -13,6 +14,24 @@ class TimerPage extends StatefulWidget {
 
 class _TimerPageState extends State<TimerPage> {
   final Stopwatch _stopwatch = Stopwatch();
+  bool _permissionsGranted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestPermissions();
+  }
+
+  Future<void> _requestPermissions() async {
+    final granted = await PermissionService.requestPermissions();
+    setState(() {
+      _permissionsGranted = granted;
+    });
+
+    if (!granted && mounted) {
+      await PermissionService.showPermissionDialog(context);
+    }
+  }
 
   void _handleStartStop() {
     setState(() {
